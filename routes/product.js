@@ -12,7 +12,6 @@ exports.productListBySchool = (req,res)=>{
                 })
             }
             else{
-                console.log(result)
                 if(result.recordset == 0)
                 {
                     res.send({
@@ -25,7 +24,7 @@ exports.productListBySchool = (req,res)=>{
                     res.send({
                         "status":"1",
                         "message":"Product List",
-                        "data":Object.values(JSON.parse(result.recordset[0])),
+                        "data":Object.values(JSON.parse(result.recordset[0]['JSON_F52E2B61-18A1-11d1-B105-00805F49916B']))
                     })
                 }
             }
@@ -39,6 +38,7 @@ exports.productListByCategory = (req,res)=>{
         var request = new db.Request();
         request.input('ActionType',db.NVarChar,'productListByCategory')
         request.input('category',db.NVarChar,req.body.category)
+        request.input('uid',db.NVarChar,req.body.uid)
         request.execute('prcRegisterApp',(error,result)=>{
             if(error)
             {
@@ -63,7 +63,7 @@ exports.productListByCategory = (req,res)=>{
                     res.send({
                         "status":"1",
                         "message":"Product List",
-                        "data":Object.values(JSON.parse(result.recordset)),
+                        "data":Object.values(JSON.parse(result.recordset[0]['JSON_F52E2B61-18A1-11d1-B105-00805F49916B']))
                     })
                 }
             }

@@ -121,10 +121,11 @@ router.post('/order/orderhistory',order.orderhistory);
 router.post('/check/checkout',check.checkout);
 router.post('/check/OrderList',check.OrderList);
 
+
 router.post('/productcount/productcount',order.productcount);
 
 
-
+ 
 router.post('/Payment/getHash',(req,res)=>{
   var key = req.body.key
  //var merchantId = req.merchantId;
@@ -137,10 +138,6 @@ router.post('/Payment/getHash',(req,res)=>{
   var firstName = req.body.firstName
  //var phone = req.phone
   var salt = '5bgleeC5rj'
-
- 
-  
-  
 
   var cryp = crypto.createHash('sha512');
   var text = key+'|'+txnid+'|'+amount+'|'+productInfo+'|'+firstName+'|'+email+'|||||||||||'+salt;

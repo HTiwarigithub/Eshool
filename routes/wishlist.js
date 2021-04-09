@@ -53,14 +53,14 @@ exports.wishlistProducts = (req,res)=>{
                 {
                     res.send({
                         "status":"0",
-                        "message":"no product in wishlist",
+                        "message":"No product in wishlist",
                         "data":[]
                     })  
                 }
                 else{
                     res.send({
                         "status":"1",
-                        "message":"wishlist",
+                        "message":"Wishlist",
                         "data":Object.values(JSON.parse(result.recordset[0]['JSON_F52E2B61-18A1-11d1-B105-00805F49916B']))
                     })
                 }

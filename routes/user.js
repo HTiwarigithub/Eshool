@@ -14,7 +14,6 @@ module.exports.signup = (req,res)=>{
         request.input('address',db.NVarChar,address);
         request.input('gender',db.NVarChar,gender);
         request.input('otp',db.NVarChar,otp);
-        // request.input('dnt',db.NVarChar,new Date());
         request.execute('prcRegisterApp',(error,result)=>{
             if(error)
             {
@@ -65,14 +64,14 @@ module.exports.login = (req,res)=>{
                 {
                     res.send({
                         "status":"0",
-                        "message":"error in login",
+                        "message":"Invalid Credentials",
                         "data":{}
                     })
                 }
                 else{
                     res.send({
                         "status":"1",
-                        "message":"Login successfully",
+                        "message":"Login Successfully",
                         "data":result.recordset[0]
                     })
                 }

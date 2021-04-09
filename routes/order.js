@@ -5,15 +5,13 @@ exports.orderhistory = (req,res)=>{
         request.input('ActionType',db.NVarChar,'Select');
         request.input('Customerid',db.NVarChar,req.body.Customerid)
         request.execute('OredrHistory',(error,result)=>{
-            if(error)
-            {
+            if(error){
                 res.send({
                     "status":"0",
                     "message":"Error Occured",
                     "data":[]
                 })
-            }
-            else{
+            }else{
                 if(result.recordset == 0)
                 {
                     res.send({
@@ -39,10 +37,8 @@ exports.productcount = (req,res)=>{
     db.close();
     db.connect(conn,()=>{
         var request = new db.Request();
-        
         request.input('userid',db.NVarChar,req.body.userid)
-        request.execute('productcount',(error,result)=>{
-            
+        request.execute('productcount',(error,result)=>{  
             if(error)
             {
                 res.send({
@@ -71,3 +67,4 @@ exports.productcount = (req,res)=>{
         });
     })
 }
+
