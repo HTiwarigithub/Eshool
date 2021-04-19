@@ -1,26 +1,30 @@
 exports.productListBySchool = (req,res)=>{
+    console.log("enter")
     db.close();
     db.connect(conn,()=>{
+        console.log("enter")
         var request = new db.Request();
-        request.query('select p.*,(select pi.* from productimages pi where pi.Productid = p.Id FOR JSON PATH) productImages,(select up.* from unitandprice up where up.ProductId = p.Id FOR JSON PATH) ProductUnitPrice, (SELECT rv.* FROM ratingreview rv WHERE rv.pid = p.Id FOR JSON PATH) ProductReviews from productmaster p where p.brandid = '+req.body.schoolId +'FOR JSON PATH',(error,result)=>{
-            if(error)
-            {
+        request.input('ActionType',db.NVarChar,'productListBySchool')
+        request.input('category',db.NVarChar,req.body.category)
+        request.input('uid',db.NVarChar,req.body.uid)
+        request.execute('prcRegisterApp',(error,result)=>{
+            if(error){
+                console.log("Error_block",error)
                 res.send({
                     "status":"0",
                     "message":"Error Occured",
                     "data":[]
                 })
-            }
-            else{
-                if(result.recordset == 0)
-                {
+            }else{
+                if(result.recordset == 0){
+                    console.log("result.recordset",result.recordset)
                     res.send({
                         "status":"0",
-                        "message":"no product",
+                        "message":"No product",
                         "data":[]
                     })
-                }
-                else{
+                }else{
+                    console.log("result.recordset",result.recordset[0])
                     res.send({
                         "status":"1",
                         "message":"Product List",
